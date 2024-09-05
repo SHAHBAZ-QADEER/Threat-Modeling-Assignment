@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Web Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .hidden {
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .message-of-the-day, .comments-section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Login Page -->
+    <div id="login-page">
+        <h2>Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Message-of-the-Day Page -->
+    <div id="message-page" class="hidden">
+        <h2>Message of the Day</h2>
+        <p id="message-content">Welcome! You are successfully logged in.</p>
+        <div class="comments-section">
+            <h3>Comments</h3>
+            <form id="comment-form">
+                <div class="form-group">
+                    <label for="comment">Add a Comment:</label>
+                    <textarea id="comment" name="comment" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Submit Comment</button>
+                </div>
+            </form>
+            <div id="comments-list">
+                <!-- Comments will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Example data
+    const validUsername = "user";
+    const validPassword = "password";
+    const messageOfTheDay = "Here is your message of the day!";
+
+    // Simulate form submission
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Simulate authentication
+        if (username === validUsername && password === validPassword) {
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('message-page').classList.remove('hidden');
+            document.getElementById('message-content').textContent = messageOfTheDay;
+        } else {
+            alert('Invalid credentials, please try again.');
+        }
+    });
+
+    // Simulate comment submission
+    document.getElementById('comment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const comment = document.getElementById('comment').value;
+
+        // Add the comment to the comments list
+        const commentsList = document.getElementById('comments-list');
+        const commentElement = document.createElement('p');
+        commentElement.textContent = comment;
+        commentsList.appendChild(commentElement);
+
+        // Clear the comment textarea
+        document.getElementById('comment').value = '';
+    });
+</script>
+
+</body>
+</html>
